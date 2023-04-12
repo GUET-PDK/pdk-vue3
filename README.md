@@ -4,7 +4,7 @@
 
 - 校园跑腿系统 Web 管理后台——GUET 软工大三课设
 
-- 基于 Vite3 + Vue3.2 + Vuex + VueRouter + WindiCSS + Less + Element-Plus 构建
+- 基于 Vite3 + Vue3.2 + Vuex + VueRouter + WindiCSS + Element-Plus 构建
 
 ### 食用教程
 
