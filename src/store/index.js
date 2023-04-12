@@ -4,7 +4,6 @@
  * @return {*}
  */
 import { createStore } from "vuex";
-import { getInfo, login } from "@/api/manager.js"
 import { setToken, removeToken } from "@/utils/token.js"
 
 // 创建store的实例
@@ -40,7 +39,11 @@ const store = createStore({
     actions: {
         // 登录
         async userLogin({ commit }, { username, passord }) {
-
+            try {
+                
+            } catch {
+                
+            }
         },
         // 获取用户信息
         async getUserInfo({ commit }) {
@@ -61,3 +64,5 @@ const store = createStore({
         }
     }
 })
+
+export default store

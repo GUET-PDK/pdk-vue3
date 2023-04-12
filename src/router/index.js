@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import login from '@/views/login.vue'
+import admin from '@/views/layout/admin.vue'
 const NotFound = () => import('@/views/404.vue')
 
 const router = createRouter({
@@ -7,9 +8,21 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: login
+      name: 'admin',
+      component: admin,
+      // 子路由
+
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: login,
+      meta: {
+        title: '登录'
+      }
+    },
+
+    // 404页面
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
