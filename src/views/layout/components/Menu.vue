@@ -1,7 +1,16 @@
+<!--
+ * @Author: liangtd
+ * @Date: 2023-04-12 16:47:22
+ * @LastEditors: liangtd
+ * @LastEditTime: 2023-04-14 17:11:48
+ * @Description: 页面左侧多级菜单布局
+-->
+
 <template>
     <div class="f-menu" :style="{ width: $store.state.asideWidth }">
         <el-menu :collapse="isCollapse" unique-opened :default-active="defaultActive" class="border-0"
-            @select="handleSelect">
+            @select="handleSelect" :collapse-transition="false">
+
             <template v-for="(item, index) in asideMenus" :key="index">
                 <!-- 二级菜单 -->
                 <el-sub-menu :index="item.name" v-if="item.child && item.child.length > 0">
@@ -18,6 +27,7 @@
                         <span>{{ child.name }}</span>
                     </el-menu-item>
                 </el-sub-menu>
+
                 <!-- 一级菜单 -->
                 <el-menu-item :index="item.frontpath" v-else>
                     <el-icon>
@@ -31,96 +41,30 @@
 </template>
 
 <script setup>
-import { HomeFilled, } from '@element-plus/icons-vue'
-const asideMenus = [
-    {
-        'name': '主控面板',
-        'icon': 'HomeFilled',
-        'frontpath': '/'
-    },
-    {
-        'name': '订单模块',
-        'icon': '',
-        'child': [
-            {
-                'name': '订单管理',
-                'icon': '',
-                'frontpath': '/order/list'
-            },
-            {
-                'name': '评价管理',
-                'icon': '',
-                'frontpath': '/comment/list'
-            }
-        ]
-    },
-    {
-        'name': '用户模块',
-        'icon': 'UserFilled',
-        'child': [
-            {
-                'name': '用户管理',
-                'icon': 'User',
-                'frontpath': '/user/list'
-            },
-            {
-                'name': '认证管理',
-                'icon': '',
-                'frontpath': '/apply/list'
-            }
-        ]
-    },
-    {
-        'name': '骑手模块',
-        'icon': '',
-        'child': [
-            {
-                'name': '骑手管理',
-                'icon': '',
-                'frontpath': ''
-            },
-            {
-                'name': '撤销管理',
-                'icon': '',
-                'frontpath': ''
-            }
-        ]
-    },
-    {
-        'name': '其他模块',
-        'icon': '',
-        'child': [
-            {
-                'name': '图片管理',
-                'icon': '',
-                'frontpath': ''
-            },
-            {
-                'name': '通知管理',
-                'icon': '',
-                'frontpath': ''
-            }
-        ]
-    },
-    {
-        'name': '系统设置',
-        'icon': '',
-        'child': [
-            {
-                'name': '基础设置',
-                'icon': '',
-                'frontpath': ''
-            },
-            {
-                'name': '物流设置',
-                'icon': '',
-                'frontpath': ''
-            }
-        ]
-    },
+import { menus } from '@/utils/common.js'
+import { ref, computed } from 'vue'
+import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router'
+import { useStore } from 'vuex'
+const router = useRouter()
+const route = useRoute()
+const store = useStore()
 
+// 菜单数据
+const asideMenus = menus
 
-]
+// 是否折叠侧边栏
+const isCollapse = computed(() => store.state.asideWidth == '64px')
+
+// 默认选中
+const defaultActive = ref(route.path)
+
+// 监听路由变化
+onBeforeRouteUpdate((to, from) => {
+    defaultActive.value = to.path
+})
+
+// 切换页面
+const handleSelect = index => router.push(index)
 </script>
 
 <style scoped>

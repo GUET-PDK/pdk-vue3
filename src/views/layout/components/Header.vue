@@ -1,3 +1,10 @@
+<!--
+ * @Author: liangtd
+ * @Date: 2023-04-12 16:46:55
+ * @LastEditors: liangtd
+ * @LastEditTime: 2023-04-14 17:27:25
+ * @Description: 页面顶栏布局
+-->
 <template>
     <div class="header">
         <!-- 左侧 -->
@@ -43,6 +50,7 @@
             </el-dropdown>
         </div>
     </div>
+
     <!-- 修改密码  element抽屉组件 -->
     <FormDrawer ref="formDrawer" title="修改密码" destroyOnClose @submit="onSubmit">
         <el-form :model="form" :rules="rules" ref="formRef" label-width="80px" style="width: 98%;">
@@ -60,7 +68,6 @@
 </template>
 
 <script setup>
-import { ElementPlus, Fold , Expand, Refresh, FullScreen , Aim, ArrowDown } from "@element-plus/icons-vue"
 import { useRepassword, useLogout } from "@/hooks/useManager.js"
 import { useFullscreen } from "@vueuse/core"
 

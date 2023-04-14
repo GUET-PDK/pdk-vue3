@@ -1,3 +1,10 @@
+/*
+ * @Author: liangtd
+ * @Date: 2023-04-12 10:23:15
+ * @LastEditors: liangtd
+ * @LastEditTime: 2023-04-14 10:43:15
+ * @Description: 
+ */
 /**
  * @description: Vuex配置文件
  * @Date: 2023-04-12 10:28:05
@@ -24,7 +31,7 @@ const store = createStore({
 
         // 展开或收缩侧边栏
         handleAsideWidth(state) {
-            state.asideWidth = state.asideWidth == "250px" ? "50px" : "250px"
+            state.asideWidth = state.asideWidth == "250px" ? "64px" : "250px"
         },
 
         setMenus(state, menus) {
@@ -40,9 +47,9 @@ const store = createStore({
         // 登录
         async userLogin({ commit }, { username, passord }) {
             try {
-                
-            } catch {
-                
+                setToken(username+passord)
+            } catch(err) {
+                return Promise.reject(error)
             }
         },
         // 获取用户信息

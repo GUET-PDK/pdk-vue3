@@ -1,7 +1,97 @@
-/**
- * 工具类
+/*
+ * @Author: liangtd
+ * @Date: 2023-04-12 09:39:04
+ * @LastEditors: liangtd
+ * @LastEditTime: 2023-04-14 17:20:43
+ * @Description: 
  */
 import { ElNotification, ElMessageBox } from 'element-plus'
+
+// 页面相关 --------------------------------------------------------------------
+// 页面左侧多级菜单数据
+export const menus = [
+    {
+        'name': '主控面板',
+        'icon': 'HomeFilled',
+        'frontpath': '/'
+    },
+    {
+        'name': '订单模块',
+        'icon': 'Shop',
+        'child': [
+            {
+                'name': '订单管理',
+                'icon': 'Reading',
+                'frontpath': '/order/list'
+            },
+            {
+                'name': '评价管理',
+                'icon': 'ChatDotRound',
+                'frontpath': '/comment/list'
+            }
+        ]
+    },
+    {
+        'name': '用户模块',
+        'icon': 'UserFilled',
+        'child': [
+            {
+                'name': '用户管理',
+                'icon': 'User',
+                'frontpath': '/user/list'
+            },
+            {
+                'name': '认证管理',
+                'icon': 'TrophyBase',
+                'frontpath': '/check/list'
+            }
+        ]
+    },
+    {
+        'name': '骑手模块',
+        'icon': 'Management',
+        'child': [
+            {
+                'name': '骑手管理',
+                'icon': 'Van',
+                'frontpath': '/rider/list'
+            },
+            {
+                'name': '撤销管理',
+                'icon': 'Brush',
+                'frontpath': '/repeal/list'
+            }
+        ]
+    },
+    {
+        'name': '其他模块',
+        'icon': 'MoreFilled',
+        'child': [
+            {
+                'name': '图片管理',
+                'icon': 'Picture',
+                'frontpath': '/picture/list'
+            },
+            {
+                'name': '通知管理',
+                'icon': 'Bell',
+                'frontpath': '/bell/list'
+            }
+        ]
+    },
+    {
+        'name': '系统设置',
+        'icon': 'Tools',
+        'child': [
+            {
+                'name': '基础设置',
+                'icon': 'Operation',
+                'frontpath': '/setting/base'
+            }
+        ]
+    },
+]
+
 
 // 提示相关 --------------------------------------------------------------------
 // 消息提示
