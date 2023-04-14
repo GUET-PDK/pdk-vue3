@@ -2,7 +2,7 @@
  * @Author: liangtd
  * @Date: 2023-04-12 14:07:50
  * @LastEditors: liangtd
- * @LastEditTime: 2023-04-14 13:40:56
+ * @LastEditTime: 2023-04-14 20:20:10
  * @Description: 整个页面的布局（顶栏、左侧多级菜单栏、右侧弹出抽屉）
 -->
 <template>
@@ -53,6 +53,42 @@ import TagList from './components/TagList.vue'
 
 <style scoped>
 .el-aside {
-    transition: all 0.2s;
+    transition: all 0.3s;
+    /* z-index: 22;解决侧边栏阴影被tag覆盖不显示 */
+    z-index: 22;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-5%, 0, 0);
+    transform: translate3d(-5%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeOutRight {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(5%, 0, 0);
+    transform: translate3d(5%, 0, 0);
+  }
+}
+
+.fade-enter-active {
+  animation: fadeInLeft 0.3s;
+}
+
+.fade-leave-active {
+  animation: fadeOutRight 0.3s;
 }
 </style>

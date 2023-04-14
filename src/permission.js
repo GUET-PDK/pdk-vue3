@@ -2,7 +2,7 @@
  * @Author: liangtd
  * @Date: 2023-04-14 15:47:34
  * @LastEditors: liangtd
- * @LastEditTime: 2023-04-14 17:30:09
+ * @LastEditTime: 2023-04-14 19:31:02
  * @Description: 全局导航守卫
  */
 import { router, addRouters } from '@/router/index.js'
@@ -41,6 +41,7 @@ router.beforeEach(async (to, from) => {
     // 设置页面标题
     document.title = to.meta.title ? to.meta.title : "GUET跑得快-后台管理系统"
 
+    // 添加新路由时避免因刷新页面而找不到抛出404
     if (hasNewRoutes) return to.fullPath
 })
 

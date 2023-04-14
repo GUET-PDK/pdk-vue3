@@ -12,4 +12,8 @@
 
 <script setup></script>
 
-<style scoped></style>
+<style>
+body {
+  @apply bg-gray-100;
+}
+</style>

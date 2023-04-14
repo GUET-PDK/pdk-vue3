@@ -2,7 +2,7 @@
  * @Author: liangtd
  * @Date: 2023-04-12 10:23:15
  * @LastEditors: liangtd
- * @LastEditTime: 2023-04-14 10:43:15
+ * @LastEditTime: 2023-04-14 19:27:47
  * @Description: 
  */
 /**
@@ -34,10 +34,6 @@ const store = createStore({
             state.asideWidth = state.asideWidth == "250px" ? "64px" : "250px"
         },
 
-        setMenus(state, menus) {
-            state.menus = menus
-        },
-
         setRuleNames(state, ruleNames) {
             state.ruleNames = ruleNames
         }
@@ -57,7 +53,6 @@ const store = createStore({
             try {
                 let result = await getInfo()
                 commit("setUserInfo", result)
-                commit("setMenus", result.menus)
                 commit("setRuleNames", result.ruleNames)
                 return result
             } catch (error) {

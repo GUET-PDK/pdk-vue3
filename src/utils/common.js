@@ -125,7 +125,7 @@ export function showMessageBox(tip, value = "") {
 }
 
 // 存储相关 --------------------------------------------------------------------
-// 设置
+// 设置缓存
 export function setStorage(key, value, storageType = "local") {
     value = typeof value == "object" ? JSON.stringify(value) : value
     if (storageType == "session") {
@@ -134,7 +134,7 @@ export function setStorage(key, value, storageType = "local") {
         localStorage.setItem(key, value)
     }
 }
-// 获取
+// 获取缓存
 export function getStorage(key, storageType = "local") {
     if (storageType == "session") {
         return JSON.parse(sessionStorage.getItem(key))
@@ -142,7 +142,7 @@ export function getStorage(key, storageType = "local") {
         return JSON.parse(localStorage.getItem(key))
     }
 }
-// 删除
+// 删除缓存
 export function removeStorage(key, storageType = "local") {
     if (storageType == "session") {
         localStorage.removeItem(key)
