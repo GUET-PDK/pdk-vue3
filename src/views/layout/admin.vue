@@ -2,7 +2,7 @@
  * @Author: liangtd
  * @Date: 2023-04-12 14:07:50
  * @LastEditors: liangtd
- * @LastEditTime: 2023-04-14 20:20:10
+ * @LastEditTime: 2023-04-15 16:50:31
  * @Description: 整个页面的布局（顶栏、左侧多级菜单栏、右侧弹出抽屉）
 -->
 <template>
@@ -33,7 +33,7 @@
                         <!-- 过渡动画 -->
                         <Transition name="fade" mode="out-in">
 
-                            <!-- 页面缓存 -->
+                            <!-- 页面缓存，最多缓存10个页面 -->
                             <KeepAlive :max="10">
                                 <component :is="Component"></component>
                             </KeepAlive>
