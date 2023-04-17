@@ -2,7 +2,7 @@
  * @Author: liangtd
  * @Date: 2023-04-15 15:17:22
  * @LastEditors: liangtd
- * @LastEditTime: 2023-04-15 20:38:29
+ * @LastEditTime: 2023-04-15 21:06:25
  * @Description: 主控台 - 底部左下的订单统计柱状图（展示某天的日发布订单和日接取订单数）
 -->
 <template>
@@ -47,7 +47,7 @@ onMounted(() => {
 
 // 销毁实例
 onBeforeUnmount(() => {
-    if (myChart) myChart.dispose()
+    if (myChart) echarts.dispose(myChart)
 })
 
 // 图表切换

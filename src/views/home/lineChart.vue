@@ -47,7 +47,7 @@ onMounted(() => {
 // 销毁实例
 onBeforeUnmount(() => {
     if (myChart)
-        myChart.dispose()
+        echarts.dispose(myChart)
 })
 
 async function setChart() {
