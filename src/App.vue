@@ -66,4 +66,14 @@ body {
   border-left-color: transparent;
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+/* 阿里字体图标设置 */
+.icon, .iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
 </style>

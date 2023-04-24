@@ -10,29 +10,27 @@
     <div class="big-box">
         <!-- 包含搜索，新增，管理订单 -->
         <div class="top">
-            <el-row>
-                <el-col :span="8">
-                    <!-- 搜索框 -->
-                    <el-input v-model="searchText" 
-                    class="w-50 m-2"
-                    placeholder="Please Input"
-                    :suffix-icon="Search" clearable />
-                </el-col>
-                <el-col :span="6" :offset="10">
-                    <el-button type="primary">添加</el-button>
-                </el-col>
-            </el-row>
+            <!-- 搜索框 -->
+            <Search 
+            class="searchbox"
+            :data="orderData"
+            ></Search>
+            <el-button class="add" type="primary">添加</el-button>
+            <el-button class="delete" type="danger">删除</el-button>
         </div>
         <!-- 表格 -->
         <div class="table">
+
             <el-table 
-            :data="tableData" style="width: 100%"
+            style="width: 980px; height: 350px;"
+            :data="orderData"
             :cell-style="{ textAlign: 'center' }"
             :header-cell-style="{ 'text-align': 'center' }"
             >
-            <el-table-column prop="date" label="下单时间" width="150" />
+            <el-table-column type="selection" width="50" />
+            <el-table-column fixed prop="date" label="下单时间" width="150" />
             <el-table-column prop="userID" label="用户ID" width="150" />
-            <el-table-column prop="description" label="订单描述" width="200" />
+            <el-table-column prop="description" label="订单描述" width="300" />
             <el-table-column prop="state" label="订单状态" width="120" >
                 <template #default="scope">
                     <el-tag
@@ -50,16 +48,21 @@
                     <el-button link type="danger" size="small" @click="deleteOrder">删除</el-button>
                 </template>
             </el-table-column>
-            </el-table>
+            </el-table>            
         </div>
+        <!-- 分页 -->
+        <div class="pagination">
+                <Pagination></Pagination>
+            </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const searchText = ref('');
+// import { ref } from 'vue'
+import Search from '@/components/searchBox.vue'
+import Pagination from '@/components/Pagination.vue'
 
-const tableData = [
+const orderData = [
   {
     date: '2016-05-03',
     userID: 'Tom',
@@ -75,9 +78,55 @@ const tableData = [
     state: '已完成',
     riderID: '111',
     money: '10',
-  }]
+    },
+    {
+    date: '2016-05-02',
+    userID: 'Tom',
+    description: '排队',
+    state: '已完成',
+    riderID: '111',
+    money: '10',
+    },{
+    date: '2016-05-02',
+    userID: 'Tom',
+    description: '排队',
+    state: '已完成',
+    riderID: '111',
+    money: '10',
+  }
+    ]
 </script>
 
 <style scoped>
 
+.top{
+    /* width: 90vw; */
+    height: 50px;
+    /* margin-bottom: 5px; */
+}
+.top .searchbox{
+    margin-left: 5px;
+    display: inline-block;
+}
+.top .add{
+    margin-left: 600px;
+    display: inline-block;
+}
+/* 实现表格自适应浏览器宽度和阴影 */
+.table{
+    display: flex;
+    height: 360px;
+    position: relative;
+}
+.table .el-table{
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+/* 分页居中 */
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 15px;
+}
 </style>

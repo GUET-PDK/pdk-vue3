@@ -16,6 +16,8 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 import FormDrawer from '@/components/table/FormDrawer.vue'
 
+import '../src/assets/iconfont/iconfont.css'
+
 import App from './App.vue'
 
 // 创建app 实例
@@ -31,6 +33,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 // 全局注册组件
-app.component('FormDrawer',FormDrawer)
+app.component('FormDrawer', FormDrawer)
 
 app.mount('#app')
