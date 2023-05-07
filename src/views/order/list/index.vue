@@ -15,8 +15,9 @@
             class="searchbox"
             :data="orderData"
             ></Search>
-            <el-button class="add" type="primary">添加</el-button>
-            <el-button class="delete" type="danger">删除</el-button>
+            <div class="flex-box"></div>
+            <el-button class="addBtn" type="primary">添加</el-button>
+            <el-button class="deleteBtn" type="danger">删除</el-button>
         </div>
         <!-- 表格 -->
         <div class="table">
@@ -52,8 +53,8 @@
         </div>
         <!-- 分页 -->
         <div class="pagination">
-                <Pagination></Pagination>
-            </div>
+            <Pagination></Pagination>
+        </div>
     </div>
 </template>
 
@@ -100,17 +101,18 @@ const orderData = [
 <style scoped>
 
 .top{
-    /* width: 90vw; */
+    display: flex;
     height: 50px;
-    /* margin-bottom: 5px; */
+}
+.flex-box{
+    flex: 1;
 }
 .top .searchbox{
     margin-left: 5px;
     display: inline-block;
 }
-.top .add{
-    margin-left: 600px;
-    display: inline-block;
+.top .deleteBtn{
+    margin-right: 25px;
 }
 /* 实现表格自适应浏览器宽度和阴影 */
 .table{

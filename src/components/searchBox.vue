@@ -14,8 +14,9 @@
 
 <style scoped>
 .searchbox{
-    @apply bg-light-50 rounded-2xl shadow-lg;
+    @apply rounded-2xl shadow-lg;
     position: relative;
+    background-color: #ffffff;
     width: 180px;
     padding: 3px;
     height: 37px;
@@ -23,11 +24,11 @@
 
 .searchbox input{
     height: 30px;
-    color: #9ca3af;
+    color: #4e4c4c;
     border: 0;
     outline: none;
     background-color: transparent;
-    padding-left: 6px;
+    padding-left: 8px;
     font-size: 14px;
 }
 /* 

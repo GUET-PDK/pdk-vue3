@@ -11,8 +11,9 @@
         <div class="top">
             <!-- 搜索框 -->
             <Search class="searchbox"></Search>
-            <el-button class="add" type="primary">添加</el-button>
-            <el-button class="delete" type="danger">删除</el-button>
+            <div class="flex-box"></div>
+            <el-button class="addBtn" type="primary">添加</el-button>
+            <el-button class="deleteBtn" type="danger">删除</el-button>
         </div>
         <!-- 表格 -->
         <div class="table">
@@ -27,10 +28,11 @@
             <el-table-column prop="sex" label="性别" width="80" />
             <el-table-column prop="telephone" label="联系电话" width="200" />
             <el-table-column prop="address" label="住址" width="350" />
-            <el-table-column fixed="right" label="操作" width="120">
+            <el-table-column fixed="right" label="操作" width="150">
                 <template #default>
-                    <el-button link type="primary" size="small" @click="modifyOrder">修改</el-button>
-                    <el-button link type="danger" size="small" @click="deleteOrder">删除</el-button>
+                    <el-button link type="primary" size="small" @click="modifyRider">修改</el-button>
+                    <el-button link type="warning" size="small" @click="banRider">封禁</el-button>
+                    <el-button link type="danger" size="small" @click="deleteRider">删除</el-button>
                 </template>
             </el-table-column>
             </el-table>
@@ -64,11 +66,18 @@ const riderData = [
 
 <style scoped>
 .top{
+    display: flex;
     height: 50px;
+}
+.flex-box{
+    flex: 1;
 }
 .top .searchbox{
     margin-left: 5px;
     display: inline-block;
+}
+.top .deleteBtn{
+    margin-right: 50px;
 }
 /* 实现表格自适应浏览器宽度和阴影 */
 .table{

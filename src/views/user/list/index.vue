@@ -12,8 +12,9 @@
         <div class="top">
             <!-- 搜索框 -->
             <Search class="searchbox"></Search>
-            <el-button class="add" type="primary">添加</el-button>
-            <el-button class="delete" type="danger">删除</el-button>
+            <div class="flex-box"></div>
+            <el-button class="addBtn" type="primary">添加</el-button>
+            <el-button class="deleteBtn" type="danger">删除</el-button>
         </div>
         <!-- 表格 -->
         <div class="table">
@@ -28,10 +29,11 @@
             <el-table-column prop="sex" label="性别" width="80" />
             <el-table-column prop="telephone" label="联系电话" width="200" />
             <el-table-column prop="address" label="住址" width="350" />
-            <el-table-column fixed="right" label="操作" width="120">
+            <el-table-column fixed="right" label="操作" width="150">
                 <template #default>
-                    <el-button link type="primary" size="small" @click="modifyOrder">修改</el-button>
-                    <el-button link type="danger" size="small" @click="deleteOrder">删除</el-button>
+                    <el-button link type="primary" size="small" @click="modifyUser">修改</el-button>
+                    <el-button link type="warning" size="small" @click="banUser">封禁</el-button>
+                    <el-button link type="danger" size="small" @click="deleteUser">删除</el-button>
                 </template>
             </el-table-column>
             </el-table>
@@ -47,30 +49,42 @@
 <script setup>
 import Search from '@/components/searchBox.vue'
 import Pagination from '@/components/Pagination.vue'
+import { reactive } from 'vue'
 
 const userData = [
-  {
-    userID: 'lucy',
-    sex: '女',
-    telephone: '123456',
-    address: '广西省×××××××××',
+    {
+    date: '2016-05-03',
+    userID: 'Tom',
+    description: '排队',
+    state: '未通过',
   },
   {
+    date: '2016-05-02',
     userID: 'Tom',
-    sex: '男',
-    telephone: '12345678',
-    address: '广西省×××××××××',
-  }]
+    description: '排队',
+    state: '已通过',
+    },
+]
+// 获取所有用户信息
+
 </script>
 
 <style scoped>
 .top{
+    display: flex;
     height: 50px;
+}
+.flex-box{
+    flex: 1;
 }
 .top .searchbox{
     margin-left: 5px;
     display: inline-block;
 }
+.top .deleteBtn{
+    margin-right: 50px;
+}
+
 /* 实现表格自适应浏览器宽度和阴影 */
 .table{
     display: flex;
