@@ -21,7 +21,7 @@
 
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .bg {
     /* 脱离文档流方法
     设置页面单独背景色
@@ -31,7 +31,7 @@
     top: 0;
     width: 100%;
     background-color: #fff;
-    // 自动撑满整个屏幕
+    /*自动撑满整个屏幕*/
     min-height: 100vh;
 }
 
@@ -48,26 +48,26 @@
     background: url(@/assets/404/bgerror.png) no-repeat 50% 150px;
     text-align: center;
     color: #29AAE3;
+}
 
-    span {
-        display: block;
-        font-size: 16px;
-        margin: 5px 0;
-    }
+.main .error span {
+    display: block;
+    font-size: 16px;
+    margin: 5px 0;
+}
 
-    .error-con {
-        font-size: 24px;
-    }
+.main .error .error-con {
+    font-size: 24px;
+}
 
-    .error-home {
-        font-size: 24px;
-        font-weight: 900;
-        margin: 10px 0;
-    }
+.main .error .error-home {
+    font-size: 24px;
+    font-weight: 900;
+    margin: 10px 0;
+}
 
-    a {
-        color: #29AAE3;
-        text-decoration: none;
-    }
+.main .error a {
+    color: #29AAE3;
+    text-decoration: none;
 }
 </style>
