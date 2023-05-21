@@ -9,11 +9,12 @@
     <div class="container">
         <div class="table">
             <el-table
-            :data="tableData1"
+            :data="commentData"
             style="width: 100%"
             row-key="id"
             border
             :load="load"
+            lazy
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
             >
                 <el-table-column prop="date" label="Date" />

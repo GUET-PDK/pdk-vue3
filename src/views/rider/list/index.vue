@@ -12,7 +12,7 @@
             <!-- 搜索框 -->
             <Search class="searchbox"></Search>
             <div class="flex-box"></div>
-            <el-button class="addBtn" type="primary">添加</el-button>
+            <el-button class="addBtn" color="#219EBC">添加</el-button>
             <el-button class="deleteBtn" type="danger">删除</el-button>
         </div>
         <!-- 表格 -->

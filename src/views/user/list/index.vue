@@ -13,7 +13,7 @@
             <!-- 搜索框 -->
             <Search class="searchbox"></Search>
             <div class="flex-box"></div>
-            <el-button class="addBtn" type="primary">添加</el-button>
+            <el-button class="addBtn" color="#219EBC">添加</el-button>
             <el-button class="deleteBtn" type="danger">删除</el-button>
         </div>
         <!-- 表格 -->
@@ -31,9 +31,9 @@
             <el-table-column prop="address" label="住址" width="350" />
             <el-table-column fixed="right" label="操作" width="150">
                 <template #default>
-                    <el-button link type="primary" size="small" @click="modifyUser">修改</el-button>
-                    <el-button link type="warning" size="small" @click="banUser">封禁</el-button>
-                    <el-button link type="danger" size="small" @click="deleteUser">删除</el-button>
+                    <el-button link type="primary" @click="modifyUser">修改</el-button>
+                    <el-button link type="warning" @click="banUser">封禁</el-button>
+                    <el-button link type="danger" @click="deleteUser">删除</el-button>
                 </template>
             </el-table-column>
             </el-table>
