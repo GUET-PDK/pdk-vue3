@@ -15,9 +15,13 @@ import WindiCSS from 'vite-plugin-windicss'
 export default defineConfig({
   // 配置插件
   plugins: [
-    vue(),
+    // 是否开启$ref，vue3.2语法糖
+    vue({
+      refTransform: true,
+      reactivityTransform: true
+    }),
     WindiCSS(),
-    
+
   ],
 
   // 设置路径别名
