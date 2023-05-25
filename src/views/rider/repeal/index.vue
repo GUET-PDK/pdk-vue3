@@ -26,6 +26,8 @@
         :data="orderData"
         :cell-style="{ textAlign: 'center' }"
         :header-cell-style="{ 'text-align': 'center' }"
+        ref="multipleTableRef"
+        @selection-change="handleSelectionChange"
         >
         <el-table-column type="selection" width="50" />
         <el-table-column fixed prop="userID" label="用户ID" width="150" />
@@ -62,31 +64,38 @@ import Pagination from '@/components/Pagination.vue'
 import {Select, CloseBold} from '@element-plus/icons-vue'
 
 
-const orderData = [
-  {
-    date: '2016-05-03',
-    userID: 'Tom',
-    description: '排队',
-    state: '未通过',
-  },
-  {
-    date: '2016-05-02',
-    userID: 'Tom',
-    description: '排队',
-    state: '已通过',
+let orderData = $ref([
+    {
+        date: '2016-05-03',
+        userID: 'Tom',
+        description: '排队',
+        state: '未通过',
     },
     {
-    date: '2016-05-02',
-    userID: 'Tom',
-    description: '排队',
-    state: '已通过',
-    },{
-    date: '2016-05-02',
-    userID: 'Tom',
-    description: '排队',
-    state: '已通过',
-   }
-    ]
+        date: '2016-05-02',
+        userID: 'Tom',
+        description: '排队',
+        state: '已通过',
+    },
+    {
+        date: '2016-05-02',
+        userID: 'Tom',
+        description: '排队',
+        state: '已通过',
+    }, {
+        date: '2016-05-02',
+        userID: 'Tom',
+        description: '排队',
+        state: '已通过',
+    }
+]);
+let multipleTableRef = $ref([]);  //多选
+// 方法
+// 多选
+const handleSelectionChange = (val) => {
+    multipleTableRef = val;
+    console.log(multipleTableRef);
+}
 </script>
 
 <style scoped>

@@ -12,6 +12,7 @@
  */
 import { createStore } from "vuex";
 import { setToken, removeToken } from "@/utils/token.js"
+import axios from '../api/axios'
 
 // 创建store的实例
 const store = createStore({
@@ -41,11 +42,17 @@ const store = createStore({
 
     actions: {
         // 登录
-        async userLogin({ commit }, { username, passord }) {
+        async userLogin({ commit }, form) {
             try {
-                setToken(username+passord)
-            } catch(err) {
-                return Promise.reject(error)
+                console.log(form);
+                await axios.get('admin/login', {
+                    "phone": form.phone,
+                    "code": form.code
+                }).then((res) => {
+                    console.log(res);
+                })
+            } catch (err) {
+                return Promise.reject(err)
             }
         },
         // 获取用户信息

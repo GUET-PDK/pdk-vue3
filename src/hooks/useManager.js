@@ -11,6 +11,7 @@ import { ref, reactive } from "vue"
 import { useRouter } from "vue-router"
 import { useStore } from "vuex"
 import { notification, showModal } from "@/utils/common.js"
+import { removeToken } from '../utils/token'
 
 
 
@@ -49,10 +50,10 @@ export function useRepassword() {
             formDrawer.value.showLoading()
         })
         try {
-            
+
         } catch (err) {
-            
-        } finally{
+
+        } finally {
             formDrawer.value.hideLoading()
         }
     }
@@ -73,9 +74,10 @@ export function useLogout() {
     const router = useRouter()
     const handleLogout = () => {
         showModal("是否确定退出登录？").then(() => {
+            removeToken()
             router.push("/login")
-            notification("退出登录成功！")
+            notification("退出登录成功！", "success")
         })
     }
-    return {handleLogout}
+    return { handleLogout }
 }

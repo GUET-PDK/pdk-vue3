@@ -7,7 +7,8 @@ const key = "admin-token"
 
 // 设置token
 export function setToken(token) {
-    return localStorage.setItem(key,token)
+
+    return localStorage.setItem(key, token)
 }
 
 // 获取token

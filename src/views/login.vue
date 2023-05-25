@@ -20,15 +20,16 @@
                     <h2 class="title">欢迎回来,管理员</h2>
                     <div class="tip">
                         <span class="line"></span>
-                        <span>账号密码登录</span>
+                        <span>账号登录</span>
                         <span class="line"></span>
                     </div>
 
                     <!-- 登录表单 -->
                     <div class="flex justify-center items-center" >
                         <el-form :model="form" class="w-[48%]" :rules="rules" ref="formRef">
-                            <el-form-item prop="username">
-                                <el-input v-model="form.username" size="large" placeholder="请输入用户名">
+                          <!-- prop表单规则 -->
+                            <el-form-item prop="phone">
+                                <el-input v-model="form.phone" size="large" placeholder="请输入电话号码">
                                     <template #prefix>
                                         <el-icon>
                                             <User />
@@ -36,17 +37,18 @@
                                     </template>
                                 </el-input>
                             </el-form-item>
-                            <el-form-item prop="password">
-                                <el-input v-model="form.password" type="password" size="large" show-password placeholder="请输入密码" >
+                            <el-form-item prop="code">
+                                <el-input v-model="form.code" style="width: 146px;" size="large" placeholder="请输入验证码" >
                                     <template #prefix>
                                         <el-icon>
                                             <Lock />
                                         </el-icon>
                                     </template>
                                 </el-input>
+                                <el-button color="#4460f1" style="height: 38px;" @click="sendCaptcha()">发送验证码</el-button>
                             </el-form-item>
                             <el-form-item>
-                                <el-button type="primary" :loading="loading" @click="submit" class="submit-btn" round color="#4460f1">
+                                <el-button type="primary" :loading="loading" @click="submit(form)" class="submit-btn" round color="#4460f1">
                                     登录
                                 </el-button>
                             </el-form-item>
@@ -64,40 +66,75 @@ import { useRouter } from "vue-router"
 import { useStore } from "vuex"
 import { notification } from "@/utils/common.js"
 import { User, Lock } from "@element-plus/icons-vue"
+import { setToken } from "../utils/token"
+import { sendCode, login } from "../api/homePage"
 
 const router = useRouter()
 const store = useStore()
 
 // 表单数据
-const form = reactive({
-    username: "",
-    password: ""
+let form = reactive({
+    phone: "",
+    code: ""
 })
+
+
 
 // 表单校验
 const rules = reactive({
-    username: [
-        { required: true, message: '用户名不能为空', trigger: 'blur' }
+    phone: [
+        { required: true, message: '电话号码不能为空', trigger: 'blur' }
     ],
-    password: [
-        { required: true, message: '密码不能为空', trigger: 'blur' }
+    code: [
+        { required: true, message: '验证码不能为空', trigger: 'blur' }
     ]
 })
 
 let formRef = ref(null)
 let loading = ref(false)
 
+// 发送验证码
+const sendCaptcha = () => {
+  // 向后端传的表单数据
+  let formData = new FormData();
+  formData.append('phone', form.phone);
+  // axios.post(
+  //   "admin/getCode", formData
+  // )
+  sendCode(formData)
+    .then((res) => {
+      console.log(res.data.code);
+      if (res.data.code === 200) {
+        notification("发送成功！","success")
+      } else {
+        notification("发送失败！","warning")
+      }
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+  })
+}
+
 // 表单提交方法
-function submit() {
+function submit(form) {
     formRef.value.validate(async valid => {
         if (!valid) return
         loading.value = true
-        try {
-            await store.dispatch("userLogin", form)
-            notification("登陆成功！")
-
+      try {
+        console.log(form);
+        login(form).then((res) => {
+          console.log(res);
+          if (res.data.code === 200) {
+            notification("登陆成功！", "success")
+            const token = res.headers['token'];
+            setToken(token);
             // 动态路由至首页
             router.push("/")
+          } else {
+            notification("登录失败！","warning")
+          }
+        })
+
         } finally {
             loading.value = false
         }
@@ -112,7 +149,7 @@ onUnmounted(() => {
     document.removeEventListener("keyup", onKeyUp)
 })
 function onKeyUp(event) {
-    if (event.key == "Enter") submit()
+    if (event.key == "Enter") submit(form)
 }
 
 // 处理动画结束事件

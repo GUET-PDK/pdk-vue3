@@ -29,11 +29,15 @@ import { TitleComponent, ToolboxComponent, TooltipComponent, GridComponent, Lege
 import { LineChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
+import {getActiveCount} from '@/api/homePage.js'
+
 
 echarts.use([TitleComponent, ToolboxComponent, TooltipComponent, GridComponent, LegendComponent, MarkLineComponent, MarkPointComponent, LineChart, CanvasRenderer, UniversalTransition]);
 
 let lineChart = ref(null)
 let myChart = null
+let userArr = [];  //存放用户数据
+let riderArr = []; //存放骑手数据
 
 // 初始化图表
 onMounted(() => {
@@ -51,6 +55,20 @@ onBeforeUnmount(() => {
 })
 
 async function setChart() {
+    await getActiveCount()
+        .then((res) => {
+            // console.log(res.data.data);
+            const data = res.data.data;
+            const length = res.data.data.length;
+            for (let i = 0; i < length; i++) {
+                userArr.push(data[i].userCount);
+                riderArr.push(data[i].runnerCount);
+            }
+            console.log("userArr", userArr, "riderArr", riderArr);
+        }).catch((err) => {
+            console.log(err);
+        });
+
     let option = {
         tooltip: {
             trigger: 'axis'
@@ -59,19 +77,21 @@ async function setChart() {
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
         },
         yAxis: {
             type: 'value',
+            min: 0,
+            scale: true,
             axisLabel: {
-                formatter: '{value} °C'
+                formatter: '{value} '
             }
         },
         series: [
             {
                 name: '骑手',
                 type: 'line',
-                data: [10, 11, 13, 11, 12, 12, 9],
+                data: riderArr,
                 markPoint: {
                     data: [
                         { type: 'max', name: 'Max' },
@@ -82,9 +102,9 @@ async function setChart() {
             {
                 name: '用户',
                 type: 'line',
-                data: [1, -2, 2, 5, 3, 2, 0],
+                data: userArr,
                 markPoint: {
-                    data: [{ name: '周最低', value: -2, xAxis: 1, yAxis: -1.5 }]
+                    data: [{ name: '周最低' }]
                 },
             }
         ]

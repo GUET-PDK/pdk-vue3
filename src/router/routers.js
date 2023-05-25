@@ -11,22 +11,22 @@ const index = () => import('@/views/home/index.vue')
 
 // 订单模块
 const OrderList = () => import('@/views/order/list/index.vue')
-const CommentList = () => import('@/views/order/comment/index.vue')
+// const CommentList = () => import('@/views/order/comment/index.vue')
 
 // 用户模块
 const UserList = () => import('@/views/user/list/index.vue')
-const UserCheck = () => import('@/views/user/check/index.vue')
+// const UserCheck = () => import('@/views/user/check/index.vue')
 
 // 骑手模块
 const RiderList = () => import('@/views/rider/list/index.vue')
-const RiderRepeal = () => import('@/views/rider/repeal/index.vue')
+// const RiderRepeal = () => import('@/views/rider/repeal/index.vue')
 
 // 其他模块
-const ImageList = () => import('@/views/other/picture/index.vue')
-const BellList = () => import('@/views/other/bell/index.vue')
+// const ImageList = () => import('@/views/other/picture/index.vue')
+// const BellList = () => import('@/views/other/bell/index.vue')
 
 // 系统设置
-const SettingBase = () => import('@/views/system/base/index.vue')
+// const SettingBase = () => import('@/views/system/base/index.vue')
 
 // 配置动态路由，匹配菜单动态添加路由
 export default [
@@ -47,14 +47,6 @@ export default [
         }
     },
     {
-        path: "/comment/list",
-        name: "/comment/list",
-        component: CommentList,
-        meta: {
-            title: "评价管理"
-        }
-    },
-    {
         path: "/user/list",
         name: "/user/list",
         component: UserList,
@@ -63,51 +55,12 @@ export default [
         }
     },
     {
-        path: "/check/list",
-        name: "/check/list",
-        component: UserCheck,
-        meta: {
-            title: "认证管理"
-        }
-    },
-    {
         path: "/rider/list",
         name: "/rider/list",
         component: RiderList,
         meta: {
-            title: "骑手列表"
+            title: "骑手管理"
         }
     },
-    {
-        path: "/repeal/list",
-        name: "/repeal/list",
-        component: RiderRepeal,
-        meta: {
-            title: "撤销骑手"
-        }
-    },
-    {
-        path: "/picture/list",
-        name: "/picture/list",
-        component: ImageList,
-        meta: {
-            title: "图库管理"
-        }
-    },
-    {
-        path: "/bell/list",
-        name: "/bell/list",
-        component: BellList,
-        meta: {
-            title: "消息管理"
-        }
-    },
-    {
-        path: "/setting/base",
-        name: "/setting/base",
-        component: SettingBase,
-        meta: {
-            title: "基础设置"
-        }
-    }
+
 ]

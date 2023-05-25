@@ -43,7 +43,7 @@
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item command="rePassword">修改密码</el-dropdown-item>
+                        <!-- <el-dropdown-item command="rePassword">修改密码</el-dropdown-item> -->
                         <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
@@ -52,7 +52,7 @@
     </div>
 
     <!-- 修改密码  element抽屉组件 -->
-    <FormDrawer ref="formDrawer" title="修改密码" destroyOnClose @submit="onSubmit">
+    <!-- <FormDrawer ref="formDrawer" title="修改密码" destroyOnClose @submit="onSubmit">
         <el-form :model="form" :rules="rules" ref="formRef" label-width="80px" style="width: 98%;">
             <el-form-item prop="oldpassword" label="旧密码">
                 <el-input placeholder="请输入旧密码" v-model="form.oldpassword"/>
@@ -64,7 +64,7 @@
                 <el-input type="password" show-password placeholder="请输入确认密码" v-model="form.repassword"/>
             </el-form-item>
         </el-form>
-    </FormDrawer>
+    </FormDrawer> -->
 </template>
 
 <script setup>
@@ -84,9 +84,7 @@ const handleRefresh = () => location.reload()
 function handleCommand(command) {
     if (command == "logout") {
         handleLogout()
-    } else {
-        openRepassword()
-    }
+    } 
 }
 
 </script>

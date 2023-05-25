@@ -136,23 +136,25 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { ref, computed, reactive, onMounted } from "vue"
 import CountTo from "@/components/CountTo.vue"
 import Navs from "./Navs.vue"
 import BarChart from "./BarChart.vue";
 import lineChart from "./lineChart.vue";
+import { getCountOrder, getCountUser, countApplication } from '@/api/homePage.js'
+import axios from '@/api/axios'
 
 // 获取跑腿订单数据
 const goods = ref([])
 const order = ref([])
 
 // 顶部卡片数据
-const panels = [
+let panels = reactive([
     {
         'title': '发布订单',
         'tag': '用户',
         'tagType': 'success',
-        'value': '2000',
+        'value': '0',
         'subTitle': '已支付订单',
         'subValue': '30'
     },
@@ -160,29 +162,64 @@ const panels = [
         'title': '接取订单',
         'tag': '骑手',
         'tagType': 'ifon',
-        'value': '1417',
+        'value': '0',
         'subTitle': '已完成订单',
-        'subValue': '1024'
+        'subValue': '0'
     },
     {
         'title': '待处理',
         'tag': '认证',
         'tagType': 'warning',
-        'value': '12',
+        'value': '0',
         'subTitle': '已审核',
-        'subValue': '8'
+        'subValue': '0'
     },
     {
         'title': '总用户',
         'tag': '+',
         'tagType': 'danger',
-        'value': '232',
+        'value': '0',
         'subTitle': '已认证',
-        'subValue': '90'
+        'subValue': '0'
     }
-]
+])
 
+const getAllInfo = async() => {
+  await getCountOrder()
+    .then((res) => {
+      // console.log(res.data.data);
+      // 发布总订单数
+      panels[0].value = res.data.data.postOrder;
+      // 接取的总订单数
+      panels[1].value = res.data.data.pickUpOrder;
+      panels[1].subValue = res.data.data.finishOrder;
 
+    }).catch((err) => {
+    console.log(err);
+    })
+
+    // 获取用户和骑手数量
+  await getCountUser()
+    .then((res) => {
+      // console.log(res.data.data);
+      panels[3].value = res.data.data.count;
+      panels[3].subValue = res.data.data.runnerCount;
+    }).catch((err) => {
+      console.log(err);
+    })
+
+    // 获取用户申请骑手数量
+  await countApplication()
+    .then((res) => {
+      // console.log(res.data.data);
+      panels[2].value = res.data.data.notProcessed;
+      panels[2].subValue = res.data.data.allow;
+    })
+}
+
+  onMounted(() => {
+    getAllInfo()
+  })
 // 是否显示骨架屏
 const skeletonVisible = computed(() => {
     // return (panels.value.length == 0 && goods.value.length == 0 && order.value.length == 0)

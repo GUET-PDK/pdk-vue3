@@ -79,23 +79,23 @@ export const menus = [
             }
         ]
     },
-    {
-        'name': '系统设置',
-        'icon': 'Tools',
-        'child': [
-            {
-                'name': '基础设置',
-                'icon': 'Operation',
-                'frontpath': '/setting/base'
-            }
-        ]
-    },
+    // {
+    //     'name': '系统设置',
+    //     'icon': 'Tools',
+    //     'child': [
+    //         {
+    //             'name': '基础设置',
+    //             'icon': 'Operation',
+    //             'frontpath': '/setting/base'
+    //         }
+    //     ]
+    // },
 ]
 
 
 // 提示相关 --------------------------------------------------------------------
 // 消息提示
-export function notification(message, type = 'success', dangerouslyUseHTMLString = false) {
+export function notification(message, type, dangerouslyUseHTMLString = false) {
     ElNotification({
         message,
         type,
