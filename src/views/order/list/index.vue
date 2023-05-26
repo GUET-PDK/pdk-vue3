@@ -27,6 +27,7 @@
             :cell-style="{ textAlign: 'center' }"
             :header-cell-style="{ 'text-align': 'center' }"
             ref="multipleTableRef"
+            :key="bomCheckKey"
             @selection-change="handleSelectionChange"
             >
             <el-table-column type="selection" width="50" />
@@ -106,7 +107,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref} from 'vue'
 import Search from '@/components/searchBox.vue'
 import { getAllOrders, delOrder} from '@/api/order.js'
 import { notification } from '@/utils/common.js'
@@ -124,6 +125,7 @@ let total = ref(1);
 // 默认当前页为第一页
 let CurrentPage = ref(1);
 let PageSize = ref(4);
+let bomCheckKey = reactive(0);
 
 // 方法
 
@@ -155,15 +157,15 @@ const getAllOrderList = async() => {
 }
 
 // 删除订单
-const deleteOrder = (row) => {
+const deleteOrder = async(row) => {
     let order = orderData.find(item => item.orderId === row.orderId);
     console.log(order);
-    delOrder(order.orderId)
+    await delOrder(order.orderId)
         .then((res) => {
             console.log(res.data);
             if (res.data.code === 200) {
                 notification("已删除", "success");
-                location.reload()
+                getAllOrderList();
             } else {
                 notification("请求失败", "warning");
             }

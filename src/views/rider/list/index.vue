@@ -167,7 +167,7 @@ const getAllRider = async() => {
     })
 }
 
-// 同意成为骑手
+// 拒绝成为骑手
 const disagreeRider = async(row) => {
     let rider = riderData.find(item => item.cardNumber === row.cardNumber);
     console.log(rider.id);
@@ -176,6 +176,7 @@ const disagreeRider = async(row) => {
             console.log(res.data);
             if (res.data.code === 200) {
                 notification("已拒绝", 'success');
+                getAllRider();
             } else {
                 notification("请求失败", 'warning');
         }
@@ -184,7 +185,7 @@ const disagreeRider = async(row) => {
     })
 }
 
-// 拒绝成为骑手
+// 同意成为骑手
 const agreeRider = (row) => {
     let rider = riderData.find(item => item.cardNumber === row.cardNumber);
     console.log(rider.id);
@@ -192,9 +193,10 @@ const agreeRider = (row) => {
         .then((res) => {
             console.log(res.data);
             if (res.data.code === 200) {
-                notification("已拒绝", 'success');
+                notification("已同意", 'success');
+                getAllRider();
             } else {
-                notification("请求失败", 'warning');
+                notification("该用户已成为骑手", 'warning');
         }
         }).catch((err) => {
         console.log(err);

@@ -170,7 +170,7 @@ const ban = (row) => {
             console.log(res.data);
             if (res.data.code === 200) {
                 notification("成功封禁", 'success');
-                // location.reload()
+                getAllUser();
             } else {
                 notification("请求失败", 'warning');
         }
@@ -190,7 +190,7 @@ const pin = (row) => {
             console.log(res.data);
             if (res.data.code === 200) {
                 notification("成功解禁", 'success');
-                // location.reload()
+                getAllUser();
             } else {
                 notification("请求失败", 'warning');
         }
