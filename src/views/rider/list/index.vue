@@ -25,7 +25,7 @@
             @selection-change="handleSelectionChange"
             >
             <el-table-column type="selection" width="50" />
-            <!-- <el-table-column prop="applyTime" label="申请时间" width="150" /> -->
+            <el-table-column prop="id" label="id" width="50" />
             <el-table-column prop="userId" label="用户ID" width="150" />
             <el-table-column prop="idNumber" label="学号" width="100" />
             <el-table-column prop="cardNumber" label="身份证号" width="200" />
@@ -49,9 +49,9 @@
 
             <el-table-column prop="status" label="状态" width="100" >
                 <template v-slot="scope">
-                    <el-tag v-if="scope.row.status==0">正常</el-tag>
-                    <el-tag type="warning" v-if="scope.row.status==1">封禁</el-tag>
-                    <el-tag type="danger"  v-if="scope.row.status==2">已删除</el-tag>
+                    <el-tag v-if="scope.row.status==0">审核中</el-tag>
+                    <el-tag type="warning" v-if="scope.row.status==1">已通过</el-tag>
+                    <el-tag type="danger"  v-if="scope.row.status==2">未通过</el-tag>
                 </template>
             </el-table-column>
             <el-table-column fixed="right" label="操作" width="150">
@@ -169,7 +169,7 @@ const getAllRider = async() => {
 
 // 拒绝成为骑手
 const disagreeRider = async(row) => {
-    let rider = riderData.find(item => item.cardNumber === row.cardNumber);
+    let rider = riderData.find(item => item.id === row.id);
     console.log(rider.id);
     await disAllowRunner(rider.id)
         .then((res) => {
@@ -187,7 +187,7 @@ const disagreeRider = async(row) => {
 
 // 同意成为骑手
 const agreeRider = (row) => {
-    let rider = riderData.find(item => item.cardNumber === row.cardNumber);
+    let rider = riderData.find(item => item.id === row.id);
     console.log(rider.id);
     allowRunner(rider.id)
         .then((res) => {

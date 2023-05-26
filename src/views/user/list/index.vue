@@ -43,6 +43,13 @@
                     <el-tag type="danger"  v-if="scope.row.status==2">已删除</el-tag>
                 </template>
             </el-table-column>    
+
+            <!-- 搜索 -->
+            <el-table-column align="right">
+                <template #header>
+                    <el-input v-model="search" size="small" placeholder="Type to search" />
+                </template>
+            </el-table-column>
             <el-table-column fixed="right" label="操作" width="150">
                 <template #default="scope">
                     <el-button link type="danger" @click="ban(scope.row)">封禁</el-button>
