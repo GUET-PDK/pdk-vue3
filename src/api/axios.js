@@ -2,7 +2,7 @@
  * @Author: liangtd
  * @Date: 2023-04-12 09:16:19
  * @LastEditors: liangtd
- * @LastEditTime: 2023-04-12 09:16:41
+ * @LastEditTime: 2023-06-20 09:51:55
  * @Description: Axios Http请求库配置文件
  */
 import axios from "axios";
@@ -10,7 +10,6 @@ import { ElNotification } from 'element-plus'
 import { getToken, setToken } from "../utils/token";
 
 const service = axios.create({
-    // baseURL: 'http://43.138.225.254:8080'
     baseURL: "/api"
 })
 
